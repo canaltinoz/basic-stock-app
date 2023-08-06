@@ -12,3 +12,6 @@ class UploadForm(ModelForm):
     class Meta:
         model=Flavour
         fields=['name','variety']
+
+class GetForm(ModelForm):
+    pass

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django import forms
-from .forms import UploadForm
+from .forms import UploadForm,GetForm
 from .models import Flavour
 from django.contrib.auth.decorators import login_required
 
@@ -30,6 +30,28 @@ def list(request):
         'flavour_list':flavour_list
     })
 
+
+@login_required
+def list_id(request,id):
+    
+    flavour=Flavour.objects.get(pk=id)
+    context={
+        
+        'flavour':flavour
+    }
+
+    return render(request,'app/details.html',context)
+
+
 @login_required
 def get(request):
-    return render(request,'app/get.html')
+    if request.POST:
+        
+        form=GetForm(request.POST,request.FILES)
+        print(request.FILES)
+
+        if form.is_valid():
+            form.save()
+        return redirect(list)
+    
+    return render(request,'app/get.html',{'form':GetForm})

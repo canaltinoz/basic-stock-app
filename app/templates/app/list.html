@@ -3,7 +3,6 @@
 
 {% block css_files  %}
     <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
-
 {% endblock  %}
 
 {%block content%}
@@ -17,7 +16,7 @@
     </tr>
     {% for q in flavour_list %}
     <tr>
-        <td>{{q.name}}</td>
+        <td> <a href="{% url 'list_id' q.id %}">{{q.name}}</a></td>
         <td>{{q.variety}}</td>
         <td>{{q.total}}</td>
 
