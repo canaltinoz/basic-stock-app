@@ -1,6 +1,9 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from .models import UserBalance
+
 
 
 def user_login(request):
@@ -60,3 +63,8 @@ def user_register(request):
 def user_logout(request):
     logout(request)
     return redirect("index")
+
+@login_required
+def balance(request):
+    balances = UserBalance.objects.filter(owner=request.user)
+    return render(request, 'account/balance.html',{'balances':balances})

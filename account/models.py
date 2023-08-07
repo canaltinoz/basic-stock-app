@@ -1,7 +1,26 @@
 from django.db import models
+from django.contrib.auth.models import User
+from app.models import Flavour
+from django.db.models import Sum
+
 # from django.contrib.auth.models import AbstractBaseUser
 # from django.contrib.auth.models import BaseUserManager
 # from django.conf import settings
+
+class UserBalance(models.Model):
+    starting_amount = models.PositiveIntegerField(default=100000)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def get_current_balance(self,starting_amount):
+        total_expenses = sum(q.total for q in Flavour.objects.all())
+        return self.starting_amount-total_expenses
+       
+    
+    # def change_amount(self,starting_amount):
+    #     for _ in Flavour.objects.get():
+    #         sum+=Flavour.objects.get().total
+    #     amount-=sum
+    #     return amount
 
 # class UserProfileManager(BaseUserManager):
 #     """manager for user profiles"""

@@ -26,10 +26,7 @@ def upload(request):
 def list(request):
 
     flavour_list=Flavour.objects.all()
-    return render(request, 'app/list.html', {
-        'flavour_list':flavour_list
-    })
-
+    return render(request, 'app/list.html', {'flavour_list':flavour_list})
 
 @login_required
 def list_id(request,id):
