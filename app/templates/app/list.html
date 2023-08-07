@@ -7,6 +7,7 @@
 
 {%block content%}
 
+
 <table>
     <tr>
         <th>Flavour Name</th>
@@ -19,6 +20,7 @@
         <td> <a href="{% url 'list_id' q.id %}">{{q.name}}</a></td>
         <td>{{q.variety}}</td>
         <td>{{q.total}}</td>
+        <td><a href="{% url 'update' q.id %}">Update</a></td>
 
     </tr>
     {% endfor %}

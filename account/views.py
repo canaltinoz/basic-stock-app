@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
+
 def user_login(request):
     if request.user.is_authenticated:
         return redirect("index")

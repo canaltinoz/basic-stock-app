@@ -14,4 +14,10 @@ class UploadForm(ModelForm):
         fields=['name','variety']
 
 class GetForm(ModelForm):
-    pass
+    class Meta:
+        model=Flavour
+        fields=('total',)
+        labels={'total':'Add'}
+        widgets={
+            'total':forms.NumberInput(),
+        }

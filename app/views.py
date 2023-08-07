@@ -44,14 +44,11 @@ def list_id(request,id):
 
 
 @login_required
-def get(request):
-    if request.POST:
-        
-        form=GetForm(request.POST,request.FILES)
-        print(request.FILES)
+def update(request,id):
+    flavour=Flavour.objects.get(pk=id)
+    form=GetForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('list')
 
-        if form.is_valid():
-            form.save()
-        return redirect(list)
-    
-    return render(request,'app/get.html',{'form':GetForm})
+    return render(request,'app/update.html',{'flavour':flavour,'form':form})
