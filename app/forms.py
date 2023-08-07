@@ -17,7 +17,7 @@ class GetForm(ModelForm):
     class Meta:
         model=Flavour
         fields=('total',)
-        labels={'total':'Add'}
+        labels={'total':'Total'}
         widgets={
             'total':forms.NumberInput(),
         }

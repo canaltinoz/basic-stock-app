@@ -46,9 +46,15 @@ def list_id(request,id):
 @login_required
 def update(request,id):
     flavour=Flavour.objects.get(pk=id)
-    form=GetForm(request.POST or None)
+    form=GetForm(request.POST,request.FILES,instance=flavour)
     if form.is_valid():
         form.save()
         return redirect('list')
 
     return render(request,'app/update.html',{'flavour':flavour,'form':form})
+
+@login_required
+def delete(request,id):
+    flavour=Flavour.objects.get(pk=id)
+    flavour.delete()
+    return redirect('list')
