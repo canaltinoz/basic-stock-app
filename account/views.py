@@ -1,10 +1,10 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from .models import Profile
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 from django.contrib.auth.decorators import login_required
-from .models import UserBalance
-
-
 
 def user_login(request):
     if request.user.is_authenticated:
@@ -25,7 +25,6 @@ def user_login(request):
 def user_register(request):
     if request.method != "POST":
         return render(request, "account/register.html")
-    
     
     username = request.POST["username"]
     email = request.POST["email"]
@@ -66,5 +65,6 @@ def user_logout(request):
 
 @login_required
 def balance(request):
-    balances = UserBalance.objects.filter(owner=request.user)
-    return render(request, 'account/balance.html',{'balances':balances})
+    amount=100000
+    ultimate_amount=Profile.updating_amount(self=amount)
+    return render(request, 'account/balance.html',{'ultimate_amount':ultimate_amount})
